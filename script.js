@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // AOS animasiýany başlatmak
+  // AOS Animasiýasyny Başlatmak
   AOS.init({
     once: false,
     duration: 1000,
@@ -13,25 +13,23 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let isOpened = false;
 
-  // AÝDYMY BAŞLATMAK FUNKSIÝASY
+  // Aýdym-saz oýnatmak funksiýasy
   function playAudio() {
     audio.play().then(() => {
       musicIcon.classList.remove('fa-music');
       musicIcon.classList.add('fa-pause');
     }).catch(err => {
-      console.log("Autoplay päsgelçiligi ýüze çykdy:", err);
+      console.log("Audio oýnatmakda päsgelçilik:", err);
     });
   }
 
-  // KONWERTE BASYLANDA: SAZY AWTOMATIK ÇALMAK WE KONWERTI AÇMAK
+  // Konwerte basylanda: çakylygy açmak we sazy awtomatik başlatmak
   overlay.addEventListener('click', () => {
     if (isOpened) return;
     isOpened = true;
 
-    // Sazy göni çalyp başlamak
     playAudio();
 
-    // Konwerti açyş animasiýasy
     overlay.classList.add('opened');
 
     setTimeout(() => {
@@ -39,16 +37,16 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 600);
   });
 
-  // DUÝDURYŞSYZ UKY (FALLBACK): Ulanyjy konwertden başga ekranyň islendik ýerine basanda hem sazy başlatmak
+  // Ekranyň başga bir ýerine ilkinji gezek basylsa hem sazy çalmak
   document.body.addEventListener('click', () => {
     if (audio.paused && !isOpened) {
       playAudio();
     }
   }, { once: true });
 
-  // SAZ DÜWMESI (PLAY / PAUSE TOGGLE)
+  // Saz Düwmesi (Play / Pause toggle)
   musicBtn.addEventListener('click', (e) => {
-    e.stopPropagation(); // Overlay-e basylmagyny bökdemek
+    e.stopPropagation();
     if (audio.paused) {
       playAudio();
     } else {
@@ -58,7 +56,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // TOÝA ÇENLI WAGT SANAÝJY (COUNTDOWN) - 25 Oktýabr 2026
+  // Yza wagt sanaýjy (Countdown) - 25 Oktýabr 2026, 18:00
   const weddingDate = new Date("October 25, 2026 18:00:00").getTime();
 
   function updateCountdown() {
